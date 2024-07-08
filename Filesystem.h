@@ -9,9 +9,9 @@ template <typename T>
 class Node {
     public:
         std::string name;
+        Node* parent;
         T data;                         // should the Node be a directory, this will be empty
         std::vector<Node*> children;    // should the Node be a file, this will be empty
-        Node* parent;
 
         Node(std::string name, Node* parent = nullptr, T data = T()) : name(name), parent(parent), data(data){}
 };
@@ -63,8 +63,9 @@ class FileSystem {
         }
 
         void listDirectories() {
+            std::cout << "Current Directory: " << currentDirectory->name << std::endl;
             for (auto child : currentDirectory->children) {
-                std::cout << child->name << " ";
+                std::cout << "-> " << child->name << "\n";
             }
             std::cout << "\n";
         }
@@ -74,11 +75,16 @@ class FileSystem {
         *  //- FILES
         * */
         void addFile(const std::string& fileName, const T fileData) {
-
+            Node<T>* newFile = new Node(fileName, currentDirectory, fileData);
+            currentDirectory->children.push_back(newFile);
         }
 
-        void getFileData() {
-
+        void getFileData(std::string fileName) {
+            for (auto child : currentDirectory->children) {
+                if (child->name == fileName) {
+                    std::cout << child->data << std::endl;
+                }
+            }
         }
 
 

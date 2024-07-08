@@ -17,5 +17,11 @@ int main() {
     fs.changeDirectory("..");
     fs.listDirectories();
 
+    fs.changeDirectory("root");
+    fs.addFile("subrootFile", "12");
+    fs.listDirectories();
+
+    fs.getFileData("subrootFile");
+
     return 0;
 }
