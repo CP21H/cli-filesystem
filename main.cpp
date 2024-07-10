@@ -1,9 +1,10 @@
 #include <iostream>
+#include <string>
 #include "Filesystem.h"
 
 void init_menu();
 void help_pages();
-void cli();
+void cli(FileSystem<std::string> fs);
 
 int main() {
     FileSystem<std::string> fs;
@@ -30,6 +31,7 @@ int main() {
     */
 
     init_menu();
+    cli(fs);
 
     return 0;
 }
@@ -48,15 +50,50 @@ void help_pages() {
 
 }
 
-void cli() {
+void cli(FileSystem<std::string> fs) {
     std::string clInput;
+    std::string command;
+    std::string file;
 
     do {
-        // make a char by char parser here that takes in user input
-        // and then once it reaches the first white space, creates a command out of those chars
+        std::getline(std::cin, clInput);
+
+        command.clear();
+        file.clear();
+
+        int i;
+        // HANDLE COMMAND IDENTIFICATION
+        for (i = 0; i < clInput.size() && clInput[i] != ' '; i++) {
+            command.push_back(clInput[i]);
+        }
+        i++;
+        // HANDLE FILE IDENTIFICATION
+        for (i; i < clInput.size(); i++) {
+            file.push_back((clInput[i]));
+        }
+
+        //- COMMAND LOGIC -//
+        if (command == "cd") {
+            if (file.empty()) {
+                std::cout << "Error: Invalid Command Usage." << std::endl;
+                std::cout << "Format: cd [FILE_NAME]" << std::endl;
+            } else {
+                fs.changeDirectory(file);
+            }
+        } else if (command == "ls") {
+            fs.listDirectories();
+        } else if (command == "mkdir") {
+
+        } else if (command == "rmdir") {
+
+        } else if (command == "help") {
+
+        } else {
+            std::cout << "Error: Invalid Command." << std::endl;
+        }
+
 
         // if those chars make up a valid command, move to proper command logic / code
-
         // if that command requires a directory name / file name then parse chars after white space
     } while (clInput != "q" && clInput != "Q");
 }
