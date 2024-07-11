@@ -44,6 +44,14 @@ class FileSystem {
             currentDirectory->children.push_back(newDir);
         }
 
+        void removeDirectory(const std::string& dirName) {
+            for (int i = 0; i < currentDirectory->children.size(); i++) {
+                if (currentDirectory->children[i]->name == dirName) {
+                    currentDirectory->children.erase(currentDirectory->children.begin() + i);
+                }
+            }
+        }
+
         void changeDirectory(const std::string& dirName) {
             // move back to parent directory
             if (dirName == "..") {

@@ -83,9 +83,19 @@ void cli(FileSystem<std::string> fs) {
         } else if (command == "ls") {
             fs.listDirectories();
         } else if (command == "mkdir") {
-
+            if (file.empty()) {
+                std::cout << "Error: Invalid Command Usage." << std::endl;
+                std::cout << "Format: mkdir [DIRECTORY_NAME]" << std::endl;
+            } else {
+                fs.addDirectory(file);
+            }
         } else if (command == "rmdir") {
-
+            if (file.empty()) {
+                std::cout << "Error: Invalid Command Usage." << std::endl;
+                std::cout << "Format: rmdir [DIRECTORY_NAME]" << std::endl;
+            } else {
+                fs.removeDirectory(file);
+            }
         } else if (command == "help") {
 
         } else {
