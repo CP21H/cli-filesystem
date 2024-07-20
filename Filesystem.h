@@ -2,6 +2,7 @@
 #define FILESYSTEM_FILESYSTEM_H
 
 #include <vector>
+#include <stack>
 #include <iostream>
 #include <string>
 
@@ -104,7 +105,27 @@ class FileSystem {
             return root;
         }
 
+        // storeHistory() - Add to history
+        void storeHistory(std::string command) {
+            history.push(command);
+        }
 
+        // printHistory() - Print Command History
+        void printHistory() {
+            if (history.empty()) {
+                return;
+            }
+
+            // make a copy of the history stack to preserve history
+            std::stack<std::string> historyCOPY = history;
+
+            for (int i = 0; i < historyCOPY.size(); i++) {
+                std::string cmd = historyCOPY.top();
+                historyCOPY.pop();
+                std::cout << cmd << std::endl;
+            }
+
+        }
 
 
 
@@ -114,6 +135,7 @@ class FileSystem {
     private:
         Node<T>* root;
         Node<T>* currentDirectory;
+        std::stack<std::string> history;
 };
 
 

@@ -57,6 +57,7 @@ void cli(FileSystem<std::string> fs) {
 
     do {
         std::getline(std::cin, clInput);
+        fs.storeHistory(clInput);
 
         command.clear();
         file.clear();
@@ -96,8 +97,8 @@ void cli(FileSystem<std::string> fs) {
             } else {
                 fs.removeDirectory(file);
             }
-        } else if (command == "help") {
-
+        } else if (command == "history") {
+            fs.printHistory();
         } else {
             std::cout << "Error: Invalid Command." << std::endl;
         }
