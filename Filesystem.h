@@ -119,12 +119,11 @@ class FileSystem {
             // make a copy of the history stack to preserve history
             std::stack<std::string> historyCOPY = history;
 
-            for (int i = 0; i < historyCOPY.size(); i++) {
+            while (!historyCOPY.empty()) {
                 std::string cmd = historyCOPY.top();
                 historyCOPY.pop();
                 std::cout << cmd << std::endl;
             }
-
         }
 
 
