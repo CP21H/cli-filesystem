@@ -4,7 +4,7 @@
 
 void init_menu();
 void help_pages();
-void cli(FileSystem<std::string> fs);
+void cli(FileSystem<std::string>& fs);
 
 int main() {
     FileSystem<std::string> fs;
@@ -50,7 +50,7 @@ void help_pages() {
 
 }
 
-void cli(FileSystem<std::string> fs) {
+void cli(FileSystem<std::string> &fs) {
     std::string clInput;
     std::string command;
     std::string file;
@@ -99,6 +99,8 @@ void cli(FileSystem<std::string> fs) {
             }
         } else if (command == "history") {
             fs.printHistory();
+        } else if (command == "q") {
+            std::cout << "Shutting Down..." << std::endl;
         } else {
             std::cout << "Error: Invalid Command." << std::endl;
         }
@@ -106,5 +108,5 @@ void cli(FileSystem<std::string> fs) {
 
         // if those chars make up a valid command, move to proper command logic / code
         // if that command requires a directory name / file name then parse chars after white space
-    } while (clInput != "q" && clInput != "Q");
+    } while (command != "q" && command != "Q");
 }
