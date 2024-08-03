@@ -3,36 +3,12 @@
 #include "Filesystem.h"
 
 void init_menu();
-void help_pages();
 void cli(FileSystem<std::string>& fs);
 
 int main() {
     FileSystem<std::string> fs;
-
-    /*
-    fs.addDirectory("root");
-    fs.addDirectory("childNode1");
-    fs.addDirectory("childNode2");
-
-    fs.listDirectories();
-
-    fs.changeDirectory("childNode1");
-    fs.addDirectory("grandchildNode1");
-    fs.listDirectories();
-
-    fs.changeDirectory("..");
-    fs.listDirectories();
-
-    fs.changeDirectory("root");
-    fs.addFile("subrootFile", "12");
-    fs.listDirectories();
-
-    fs.getFileData("subrootFile");
-    */
-
     init_menu();
     cli(fs);
-
     return 0;
 }
 
@@ -46,14 +22,11 @@ void init_menu() {
     std::cout << std::endl;
 }
 
-void help_pages() {
-
-}
-
 void cli(FileSystem<std::string> &fs) {
     std::string clInput;
     std::string command;
     std::string file;
+    std::string fileData;
 
     do {
         std::getline(std::cin, clInput);
@@ -61,6 +34,7 @@ void cli(FileSystem<std::string> &fs) {
 
         command.clear();
         file.clear();
+        fileData.clear();
 
         int i;
         // HANDLE COMMAND IDENTIFICATION
@@ -69,8 +43,13 @@ void cli(FileSystem<std::string> &fs) {
         }
         i++;
         // HANDLE FILE IDENTIFICATION
-        for (i; i < clInput.size(); i++) {
+        for (i; i < clInput.size() && clInput[i] != ' '; i++) {
             file.push_back((clInput[i]));
+        }
+        i++;
+        // HANDLE FILE_DATA IDENTIFICATION
+        for (i; i < clInput.size(); i++) {
+            fileData.push_back(clInput[i]);
         }
 
         //- COMMAND LOGIC -//
@@ -96,6 +75,22 @@ void cli(FileSystem<std::string> &fs) {
                 std::cout << "Format: rmdir [DIRECTORY_NAME]" << std::endl;
             } else {
                 fs.removeDirectory(file);
+            }
+        } else if (command == "mkfil") {
+            if (file.empty()) {
+                std::cout << "Error: Invalid Command Usage." << std::endl;
+                std::cout << "Format: mkfil [FILE_NAME] [DATA]" << std::endl;
+            } else {
+                fs.addFile(file, fileData);
+            }
+        } else if (command == "rmfil") {
+            std::cout << "Error: NOT IMPLEMENTED." << std::endl;
+        } else if (command == "peek") {
+            if (file.empty()) {
+                std::cout << "Error: Invalid Command Usage." << std::endl;
+                std::cout << "Format: peek [FILE_NAME]" << std::endl;
+            } else {
+                fs.getFileData(file);
             }
         } else if (command == "history") {
             fs.printHistory();
