@@ -84,7 +84,12 @@ void cli(FileSystem<std::string> &fs) {
                 fs.addFile(file, fileData);
             }
         } else if (command == "rmfil") {
-            std::cout << "Error: NOT IMPLEMENTED." << std::endl;
+            if (file.empty()) {
+                std::cout << "Error: Invalid Command Usage." << std::endl;
+                std::cout << "Format: rmfil [FILE_NAME]" << std::endl;
+            } else {
+                fs.removeFile(file);
+            }
         } else if (command == "peek") {
             if (file.empty()) {
                 std::cout << "Error: Invalid Command Usage." << std::endl;

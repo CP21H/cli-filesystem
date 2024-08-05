@@ -88,6 +88,14 @@ class FileSystem {
             currentDirectory->children.push_back(newFile);
         }
 
+        void removeFile(const std::string& fileName) {
+            for (int i = 0; i < currentDirectory->children.size(); i++) {
+                if (currentDirectory->children[i]->name == fileName) {
+                    currentDirectory->children.erase(currentDirectory->children.begin() + i);
+                }
+            }
+        }
+
         void getFileData(std::string fileName) {
             for (auto child : currentDirectory->children) {
                 if (child->name == fileName) {
