@@ -4,6 +4,7 @@
 
 void init_menu();
 void cli(FileSystem<std::string>& fs);
+void help_menu();
 
 int main() {
     FileSystem<std::string> fs;
@@ -17,9 +18,31 @@ void init_menu() {
     std::cout << "%                              %" << std::endl;
     std::cout << "%       CLI - FILE SYSTEM      %" << std::endl;
     std::cout << "%        Cristhian Prado       %" << std::endl;
+    std::cout << "%           run 'help'         %" << std::endl;
     std::cout << "%                              %" << std::endl;
     std::cout << "%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%" << std::endl;
     std::cout << std::endl;
+}
+
+void help_menu() {
+    std::cout << "%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%" << std::endl;
+    std::cout << "%                              %" << std::endl;
+    std::cout << "%           HELP MENU          %" << std::endl;
+    std::cout << "%                              %" << std::endl;
+    std::cout << "%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%" << std::endl;
+
+    std::cout << "\n";
+    std::cout << "%%% LIST OF COMMANDS" << std::endl;
+    std::cout << "cd - change directory" << std::endl;
+    std::cout << "ls - lists directory contents" << std::endl;
+    std::cout << "mkdir - make directory" << std::endl;
+    std::cout << "rmdir - remove directory" << std::endl;
+    std::cout << "mkfil - make file" << std::endl;
+    std::cout << "rmfil - remove file" << std::endl;
+    std::cout << "peek - view file contents" << std::endl;
+    std::cout << "history - list command history" << std::endl;
+    std::cout << "q - quit CLI" << std::endl;
+    std::cout << "\n";
 }
 
 void cli(FileSystem<std::string> &fs) {
@@ -99,6 +122,8 @@ void cli(FileSystem<std::string> &fs) {
             }
         } else if (command == "history") {
             fs.printHistory();
+        } else if (command == "help") {
+            help_menu();
         } else if (command == "q") {
             std::cout << "Shutting Down..." << std::endl;
         } else {
