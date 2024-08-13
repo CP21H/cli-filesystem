@@ -6,4 +6,37 @@ The **M-ary tree** is created through the usage of **Nodes**, where each Node ha
 
 A node is only classified as a directory if the **data** variable within it is null. If it is not null, then it is a file and thus will not have children. 
 
+
+
+### Filesystem.h
 ---
+The File system created for this program is done through the implementation of both a **Node** class and a **FileSystem** class, which serves as an implementation of the **M-ary tree**.
+
+> **Node contains**:
+>- `name` represented as a string
+>- `parent` represented as a Node pointer
+>- `data` represented as a templated type
+>- `children` represented as a vector of Node pointers
+
+> **Filesystem contains**:
+>- `root` represented as a Node of type T pointer
+>- `currentDirectory` represented as a Node of type T pointer
+>- `history` represented as a stack of string variables
+
+As general functionalities for a command line file system, the Filesystem class contains the following functions listed below, all of which are aptly named for their function:
+>- addDirectory()
+>- removeDirectory()
+>- changeDirectory()
+>- listDirectories()
+>- addFile()
+>- removeFile()
+>- getFileData()
+>- getRoot()
+>- storeHistory()
+>- printHistory()
+
+
+
+### Main.cpp
+---
+...
