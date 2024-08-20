@@ -39,4 +39,16 @@ As general functionalities for a command line file system, the Filesystem class 
 
 ### Main.cpp
 ---
-...
+`int main()` is a very brief part of **Main.cpp** as the majority of all functionality is compartmentalized in either functions within **Main.cpp** or part of the `Filesystem.h` created previously. The main functionality of the program is broken up into three main functions: `init_menu()`, `cli()`, `help_menu()`.
+
+`init_menu()`
+> **Purpose**: Print out a basic interface for the user welcoming them. <br>
+> **Parameters**: N/A. <br>
+> **Returns**: void <br>
+> **Usage**: Used at the beginning of main() <br>
+
+`cli()`
+> **Purpose**: Houses the programs core objective in providing a command line interface with commonplace UNIX commands. <br>
+> **Parameters**: FileSystem<std::string> &fs <br>
+> **Returns**: void <br>
+> **Usage**: Ran after a FileSystem has been created in main() and is then passed in as parameter. <br>
